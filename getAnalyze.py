@@ -48,25 +48,6 @@ def make_request(headers, start_date, end_date):
 
 # In[18]:
 
-def test():
-    analysis = TextBlob('test')
-    try:
-        an = analysis.translate(from_lang='id', to='en')        
-    except:
-        print("error")
-    
-    polarity = an.sentiment.polarity
-
-    if polarity > 0:
-        sentiment = 'positive'
-    elif polarity < 0:
-        sentiment = 'negative'
-    else:
-        sentiment = 'neutral'
-
-    return sentiment
-    
-
 def get_tweets_data(start_date, end_date):
     # tweets = make_request(headers, start_date, end_date)
     tweets      = json.loads(model.get_conversation_from_tweet_id(start_date, end_date))
@@ -78,17 +59,17 @@ def get_tweets_data(start_date, end_date):
         original_tweet = tweet['text']
         tweet['text'] = ' '.join(re.sub("(@[A-Za-z0-9]+)|(\d+)|([^0-9A-Za-z \t])|(\w+:\/\/\S+)"," ",tweet['text']).split())
         tweet['text'] = tweet['text'].lower()
-        tweet_translated = ts.google(tweet['text'])
+        # tweet_translated = ts.google(tweet['text'])
         
-        analysis = TextBlob(tweet_translated)
-        polarity = analysis.sentiment.polarity
+        # analysis = TextBlob(tweet_translated)
+        # polarity = analysis.sentiment.polarity
         
-        if polarity > 0:
-            sentiment = 'positive'
-        elif polarity < 0:
-            sentiment = 'negative'
-        else:
-            sentiment = 'neutral'
+        # if polarity > 0:
+        #     sentiment = 'positive'
+        # elif polarity < 0:
+        #     sentiment = 'negative'
+        # else:
+        #     sentiment = 'neutral'
         
         tweet_properties = {
             'tweet_id' : tweet['id'],
